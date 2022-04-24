@@ -16,53 +16,88 @@
         <%@ include file="WEB-INF/jspf/header.jspf" %>
         <div>
             <center>
-            <form method="post">
-                <% if(error == null){ %>
-                    <% if(authUserName == null){ %>
-                        <input type="text" name="username" placeholder="Usuário"/><br>
-                        <input type="password" name="password" placeholder="Senha"/> <br>
-                        <input type="submit" name="login" value="LOGIN">
+                <form method="post">
+                    <% if (error == null) { %>
+                    <% if (authUserName == null) { %>
+                    <div class="ui placeholder segment">
+                        <div class="ui two column very relaxed stackable grid">
+                            <div class="column">
+                                <div class="ui form">
+                                    <div class="field">
+                                        <label>Username</label>
+                                        <div class="ui left icon input">
+                                            <input type="text" name="username" placeholder="Usuário"/><br>
+                                            <i class="user icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <label>Password</label>
+                                        <div class="ui left icon input">
+                                            <input type="password" name="password" placeholder="Senha"/> <br>
+                                            <i class="lock icon"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <input class="ui blue submit button" type="submit" name="login" value="LOGIN">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    </div>
                     <% } %>
-                <% } else { %>
+                    <% } else {%>
                     <%= error%>
                     <a href=".">Tentar novamente</a>
-                <% } %>
-            </form>
+                    <% } %>
+                </form>
             </center>
-        </div>
-        <%  if(authUserName != null){ 
-                if (session.getAttribute("lista")== null){
-                    ArrayList lista = (ArrayList) session.getAttribute("lista");
-                    if(lista == null) {
-                        lista = new ArrayList();
-                        session.setAttribute("lista", lista);
-                        for(int i=0; i <=5; i++){
-                            lista.add(((int) (100*Math.random())));
-                        } 
-                    }
-                }
-                else{
-                    ArrayList lista = (ArrayList) session.getAttribute("lista");
+
+
+
+
+            <%  if (authUserName != null) {
+                    if (session.getAttribute("lista") == null) {
+                        ArrayList lista = (ArrayList) session.getAttribute("lista");
+                        if (lista == null) {
+                            lista = new ArrayList();
+                            session.setAttribute("lista", lista);
+                            for (int i = 0; i <= 5; i++) {
+                                lista.add(((int) (100 * Math.random())));
+                            }
+                        }
+                    } else {
+                        ArrayList lista = (ArrayList) session.getAttribute("lista");
             %>
-        <div >
-            <h1 >Dica para seu jogo na loteria:</h1>
-            <p >Faça sua sorte!</p>
-                    <table >
-                        <tr>
-                            <% for (int i=0; i<=5; i++){ %>
-                            <td> <%= i+1 %>º número: </td>
-                            <% } %>
-                        </tr>
-                        <tr>
-                            <% for (int i=0; i<=5; i++){ %>
-                            <td> <%= lista.get(i) %> </td>
-                            <% } %>
-                        </tr>
-                    </table>
-                <% } %>
-        <% } %>
-            <hr >
-        </div>
-    <%@ include file="WEB-INF/jspf/footer.jspf" %>
-    </body>
-</html>
+
+
+            <div class="ui top attached tabular menu">
+                    <div class="content">
+                        <div class="header">Dica para seu jogo na loteria:</div>
+                        <div class="meta">
+                            <span class="category">Faça sua sorte!</span>
+                        </div>
+                        <div class="item">
+                            <table >
+                                <tr>
+                                    <% for (int i = 0; i <= 5; i++) {%>
+                                    <td> <%= i + 1%>º número: </td>
+                                    <% } %>
+                                </tr>
+                                <tr>
+                                    <% for (int i = 0; i <= 5; i++) {%>
+                                    <td> <%= lista.get(i)%> </td>
+                                    <% } %>
+                                </tr>
+                            </table>
+                        </div>
+                        <% } %>
+                        <% }%>
+                    </div>
+                </div>
+
+                <%@ include file="WEB-INF/jspf/footer.jspf" %>
+                </body>
+                </html>
